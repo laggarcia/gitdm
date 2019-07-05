@@ -35,8 +35,9 @@ be:
 	-c file Specify the name of the gitdm configuration file.  
 	   	By default, "./gitdm.config" is used.
 
-	-d	Omit the developer reports, giving employer information
-         	only.
+	-d	Omit the developer reports.
+
+	-e	Omit the employer reports.
 
 	-D	Rather than create the usual statistics, create a file (datelc.csv)
 		providing lines changed per day, where the first column displays
