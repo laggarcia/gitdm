@@ -51,7 +51,7 @@ TRowStr = ' <tr><td>%s</td><td align="right">%d</td><td>%s</td></tr>\n'
 def ReportLine(text, count, pct):
     if count == 0:
         return
-    Outfile.write ('%-25s %4d (%.1f%%)\n' % (text, count, pct))
+    Outfile.write ('%-130s %4d (%.1f%%)\n' % (text, count, pct))
     if HTMLfile:
         HTMLfile.write(TRow % (text, count, pct))
 
@@ -81,7 +81,7 @@ def ReportByPCount(hlist, cscount):
         changed = max(h.added, h.removed)
         delta = h.added - h.removed
         if pcount > 0:
-            ReportLine(h.name, pcount, (pcount*100.0)/cscount)
+            ReportLine(h.name + " " + str(h.email), pcount, (pcount*100.0)/cscount)
         count += 1
         if count >= ListCount:
             break
@@ -97,7 +97,7 @@ def ReportByLChanged(hlist, totalchanged):
     for h in hlist:
         pcount = len(h.patches)
         if h.changed > 0:
-            ReportLine(h.name, h.changed, (h.changed*100.0)/totalchanged)
+            ReportLine(h.name + " " + str(h.email), h.changed, (h.changed*100.0)/totalchanged)
         count += 1
         if count >= ListCount:
             break
@@ -115,7 +115,7 @@ def ReportByLRemoved(hlist, totalremoved):
         changed = max(h.added, h.removed)
         delta = h.added - h.removed
         if delta < 0:
-            ReportLine(h.name, -delta, (-delta*100.0)/totalremoved)
+            ReportLine(h.name + " " + str(h.email), -delta, (-delta*100.0)/totalremoved)
         count += 1
         if count >= ListCount:
             break
@@ -167,7 +167,7 @@ def ReportBySOBs(hlist):
     for h in hlist:
         scount = len(h.signoffs)
         if scount > 0:
-            ReportLine(h.name, scount, (scount*100.0)/totalsobs)
+            ReportLine(h.name + " " + str(h.email), scount, (scount*100.0)/totalsobs)
         count += 1
         if count >= ListCount:
             break
@@ -189,7 +189,7 @@ def ReportByRevs(hlist):
     for h in hlist:
         scount = len(h.reviews)
         if scount > 0:
-            ReportLine(h.name, scount, (scount*100.0)/totalrevs)
+            ReportLine(h.name + " " + str(h.email), scount, (scount*100.0)/totalrevs)
         count += 1
         if count >= ListCount:
             break
@@ -211,7 +211,7 @@ def ReportByTests(hlist):
     for h in hlist:
         scount = len(h.tested)
         if scount > 0:
-            ReportLine(h.name, scount, (scount*100.0)/totaltests)
+            ReportLine(h.name + " " + str(h.email), scount, (scount*100.0)/totaltests)
         count += 1
         if count >= ListCount:
             break
@@ -229,7 +229,7 @@ def ReportByTestCreds(hlist):
     BeginReport('Developers who gave the most tested-by credits (total %d)' % totaltests)
     for h in hlist:
         if h.testcred > 0:
-            ReportLine(h.name, h.testcred, (h.testcred*100.0)/totaltests)
+            ReportLine(h.name + " " + str(h.email), h.testcred, (h.testcred*100.0)/totaltests)
         count += 1
         if count >= ListCount:
             break
@@ -253,7 +253,7 @@ def ReportByReports(hlist):
     for h in hlist:
         scount = len(h.reports)
         if scount > 0:
-            ReportLine(h.name, scount, (scount*100.0)/totalreps)
+            ReportLine(h.name + " " + str(h.email), scount, (scount*100.0)/totalreps)
         count += 1
         if count >= ListCount:
             break
@@ -271,7 +271,7 @@ def ReportByRepCreds(hlist):
     BeginReport('Developers who gave the most report credits (total %d)' % totalreps)
     for h in hlist:
         if h.repcred > 0:
-            ReportLine(h.name, h.repcred, (h.repcred*100.0)/totalreps)
+            ReportLine(h.name + " " + str(h.email), h.repcred, (h.repcred*100.0)/totalreps)
         count += 1
         if count >= ListCount:
             break
@@ -377,7 +377,7 @@ def ReportUnknowns(hlist, cscount):
     for h in ulist:
         pcount = len(h.patches)
         if pcount > 0:
-            ReportLine(h.name, pcount, (pcount*100.0)/cscount)
+            ReportLine(h.name + " " + str(h.email), pcount, (pcount*100.0)/cscount)
             count += 1
         if count >= ListCount:
             break
